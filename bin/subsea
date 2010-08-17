@@ -36,18 +36,18 @@ end
 urls = Array.new
 begin
   puts 'Try to crawl domain(s)'
-	ARGV.each do |a|
-		url = "http://#{a}" if !a.match(/^http:\/\//)
+  ARGV.each do |a|
+    url = "http://#{a}" if !a.match(/^http:\/\//)
 
-		urls << url
-	end
+    urls << url
+  end
 rescue
   puts 'Couldn''t find any domains to crawl'
   
   begin
     puts 'Trying to crawl domains from file'
-	  url_store = UrlStore.new(ARGV)
-	  urls = url_store.get_urls.sort
+    url_store = UrlStore.new(ARGV)
+    urls = url_store.get_urls.sort
   rescue
     puts 'Couldn''t find any domains to crawl'
   end  
