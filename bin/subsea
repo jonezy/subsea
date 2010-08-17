@@ -44,6 +44,8 @@ begin
 rescue
   puts 'Couldn''t find any domains to crawl'
   
+  # this is all kinds of broken at the moment
+  # need a way to check if it's a file being passed in
   begin
     puts 'Trying to crawl domains from file'
     url_store = UrlStore.new(ARGV)
