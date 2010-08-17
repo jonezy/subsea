@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'subsea'
+
+page_limit = 50
+
+opts = OptionParser.new do |opts|
+  opts.banner = "Subsea: a simple fast http cralwer"
+  opts.define_head "Usage: subsea urls [options]"
+  opts.separator ""
+  opts.separator "Examples:"
+  opts.separator "  subsea www.google.com www.yahoo.com"
+  opts.separator ""
+  opts.separator "Options:"
+
+  opts.on("--limit [LIMIT]") do |v|
+    page_limit = v
+  end
+
+  opts.on_tail("-?", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+
+  opts.on_tail("-v", "--version", "Show version") do
+
+  end
+end
+opts.parse!
+
+if ARGV.to_s.strip.empty?
+  puts opts
+  exit 1
+end
+
+urls = Array.new
+begin
+  puts 'Try to crawl domain(s)'
+	ARGV.each do |a|
+		url = "http://#{a}" if !a.match(/^http:\/\//)
+
+		urls << url
+	end
+rescue
+  puts 'Couldn''t find any domains to crawl'
+  
+  begin
+    puts 'Trying to crawl domains from file'
+	  url_store = UrlStore.new(ARGV)
+	  urls = url_store.get_urls.sort
+  rescue
+    puts 'Couldn''t find any domains to crawl'
+  end  
+end
+
+exit if urls.nil? or urls.empty?
+
+puts "Crawling #{urls.to_s} #{page_limit} times each."
+
+subsea_crawler = SubSea::Crawler.new
+begin
+	subsea_crawler.crawl(urls, page_limit)
+rescue Exception => e
+	puts "Encountered an exception #{e}"
+end
+
+puts subsea_crawler.message
