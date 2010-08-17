@@ -16,8 +16,10 @@ namespace :jeweler do
     gs.homepage = "http://github.com/jonezy/subsea"
     gs.authors = ["Chris Jones"]
     gs.has_rdoc = false  
-    gs.files.exclude("./subsea.gemspec", "../.gitignore", "test/*.rb", "../**/*.rb")
-
+    gs.files.exclude("subsea.gemspec", ".gitignore","test/*.rb", ".txt", "pkg/")
+    gs.test_files.exclude("test/*.rb")
+    gs.files.include("lib/subsea/*.rb")
+    
     gs.add_dependency('nokogiri', '>= 1.4.2')
 
     gs.add_development_dependency('jeweler', '>= 1.2.1')
