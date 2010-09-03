@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris Jones"]
-  s.date = %q{2010-08-16}
+  s.date = %q{2010-08-17}
   s.default_executable = %q{subsea}
   s.description = %q{Quickly crawl one of more domains and see if the pages are working or not}
   s.email = %q{chris@jonezy.org}
