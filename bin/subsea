@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'optparse'
-require 'lib/subsea'
+require './lib/subsea'
 
 page_limit = 50
 
