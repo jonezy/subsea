@@ -32,6 +32,7 @@ module SubSea
       time do
         urls.each do |url|
           puts "\nStarting to crawl #{url}"
+          url = url + "/" if !url.end_with?("/")
           @current_domain = url
           crawl_domain(url, page_limit)
 
